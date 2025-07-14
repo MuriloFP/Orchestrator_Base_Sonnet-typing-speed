@@ -1,0 +1,577 @@
+/* ProgressBar Component Styles */
+.progress-bar-component {
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.progress-bar-component::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-success-400), var(--color-warning-400), var(--color-primary-400));
+  background-size: 300% 100%;
+  animation: progressShimmer 5s ease-in-out infinite;
+}
+
+@keyframes progressShimmer {
+  0% { background-position: -300% 0; }
+  100% { background-position: 300% 0; }
+}
+
+.progress-bar-component.active {
+  border-color: var(--color-primary-200);
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+.progress-bar-component.inactive {
+  opacity: 0.8;
+}
+
+/* Progress Header */
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.progress-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.progress-icon {
+  font-size: var(--font-size-lg);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.progress-label {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.progress-values {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.typing-progress,
+.time-progress {
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-light);
+}
+
+/* Progress Bars Container */
+.progress-bars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.progress-bar-container {
+  position: relative;
+}
+
+.progress-bar-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.progress-percentage {
+  font-family: var(--font-family-mono);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Progress Bar Track */
+.progress-bar-track {
+  height: 12px;
+  background: var(--color-surface);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-light);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  position: relative;
+  overflow: hidden;
+  transition: width var(--transition-slow);
+}
+
+.typing-fill {
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-primary-600));
+}
+
+.typing-fill.excellent {
+  background: linear-gradient(90deg, var(--color-success-400), var(--color-success-600));
+}
+
+.typing-fill.good {
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-primary-600));
+}
+
+.typing-fill.average {
+  background: linear-gradient(90deg, var(--color-warning-400), var(--color-warning-600));
+}
+
+.typing-fill.started {
+  background: linear-gradient(90deg, var(--color-neutral-400), var(--color-neutral-600));
+}
+
+.typing-fill.beginning {
+  background: linear-gradient(90deg, var(--color-neutral-300), var(--color-neutral-500));
+}
+
+.time-fill {
+  background: linear-gradient(90deg, var(--color-secondary-400), var(--color-secondary-600));
+}
+
+/* Progress Bar Shine Effect */
+.progress-bar-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shine 2s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Progress Markers */
+.progress-markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.progress-marker {
+  position: absolute;
+  top: -8px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.marker-line {
+  width: 2px;
+  height: 28px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.progress-marker.reached .marker-line {
+  background: var(--color-primary-500);
+  height: 32px;
+}
+
+.marker-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  background: var(--color-surface-elevated);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-light);
+  transition: all var(--transition-fast);
+}
+
+.progress-marker.reached .marker-label {
+  color: var(--color-primary-700);
+  background: var(--color-primary-50);
+  border-color: var(--color-primary-200);
+  transform: scale(1.1);
+}
+
+/* Progress Comparison */
+.progress-comparison {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.comparison-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-light);
+  font-size: var(--font-size-sm);
+}
+
+.comparison-label {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.comparison-value {
+  font-weight: var(--font-weight-semibold);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.comparison-value.ahead {
+  color: var(--color-success-700);
+}
+
+.comparison-value.behind {
+  color: var(--color-warning-700);
+}
+
+.comparison-value.ontrack {
+  color: var(--color-primary-700);
+}
+
+.comparison-value.excellent {
+  color: var(--color-success-700);
+}
+
+.comparison-value.good {
+  color: var(--color-primary-700);
+}
+
+.comparison-value.average {
+  color: var(--color-warning-700);
+}
+
+.comparison-value.started {
+  color: var(--color-neutral-700);
+}
+
+.comparison-value.beginning {
+  color: var(--color-neutral-600);
+}
+
+/* Progress Details */
+.progress-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-light);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.detail-item:hover {
+  background: var(--color-primary-50);
+  border-color: var(--color-primary-200);
+  transform: translateX(4px);
+}
+
+.detail-icon {
+  font-size: var(--font-size-base);
+}
+
+.detail-text {
+  font-weight: var(--font-weight-medium);
+}
+
+/* Progress Milestones */
+.progress-milestones {
+  position: relative;
+}
+
+.milestone-notification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-success-50);
+  border: 1px solid var(--color-success-200);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-success-800);
+  animation: milestoneAppear 0.5s ease-out, milestonePulse 2s ease-in-out infinite;
+  box-shadow: var(--shadow-md);
+}
+
+@keyframes milestoneAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes milestonePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.milestone-icon {
+  font-size: var(--font-size-lg);
+}
+
+.milestone-message {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .progress-bar-component {
+    padding: var(--space-4);
+  }
+  
+  .progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  
+  .progress-values {
+    gap: var(--space-2);
+    font-size: var(--font-size-xs);
+  }
+  
+  .progress-bars {
+    gap: var(--space-3);
+  }
+  
+  .progress-bar-track {
+    height: 10px;
+  }
+  
+  .progress-comparison {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  .comparison-item {
+    justify-content: space-between;
+  }
+  
+  .progress-marker {
+    top: -6px;
+  }
+  
+  .marker-line {
+    height: 22px;
+  }
+  
+  .progress-marker.reached .marker-line {
+    height: 26px;
+  }
+  
+  .marker-label {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-bar-component {
+    padding: var(--space-3);
+  }
+  
+  .progress-label {
+    font-size: var(--font-size-base);
+  }
+  
+  .progress-values {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  
+  .progress-bar-track {
+    height: 8px;
+  }
+  
+  .progress-bars {
+    gap: var(--space-2);
+  }
+  
+  .comparison-item {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-xs);
+  }
+  
+  .detail-item {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-xs);
+  }
+  
+  .milestone-notification {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+  }
+  
+  .progress-marker {
+    display: none; /* Hide markers on very small screens */
+  }
+}
+
+/* Dark theme adjustments */
+.progress-bar-component.dark .typing-progress,
+.progress-bar-component.dark .time-progress {
+  background: var(--color-background);
+}
+
+.progress-bar-component.dark .progress-bar-track {
+  background: var(--color-background);
+}
+
+.progress-bar-component.dark .comparison-item {
+  background: var(--color-background);
+}
+
+.progress-bar-component.dark .detail-item {
+  background: var(--color-background);
+}
+
+.progress-bar-component.dark .detail-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.progress-bar-component.dark .marker-label {
+  background: var(--color-surface);
+}
+
+.progress-bar-component.dark .progress-marker.reached .marker-label {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.progress-bar-component.dark .milestone-notification {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: var(--color-success-600);
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .progress-bar-track {
+    border: 2px solid currentColor;
+  }
+  
+  .progress-bar-fill {
+    border: 1px solid currentColor;
+  }
+  
+  .comparison-item,
+  .detail-item {
+    border: 2px solid currentColor;
+  }
+  
+  .milestone-notification {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar-component::before {
+    animation: none;
+  }
+  
+  .progress-bar-fill {
+    transition: width 0.1s linear;
+  }
+  
+  .progress-bar-shine {
+    animation: none;
+    display: none;
+  }
+  
+  .marker-line,
+  .marker-label {
+    transition: none;
+  }
+  
+  .detail-item {
+    transition: none;
+  }
+  
+  .milestone-notification {
+    animation: none;
+  }
+}
+
+/* Focus indicators for accessibility */
+.progress-bar-component:focus-within {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .progress-bar-component {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .progress-bar-track {
+    background: #f0f0f0;
+    border: 1px solid #000;
+  }
+  
+  .progress-bar-fill {
+    background: #666 !important;
+  }
+  
+  .progress-bar-shine {
+    display: none;
+  }
+  
+  .milestone-notification {
+    background: #f0f0f0;
+    border: 1px solid #000;
+    color: #000;
+  }
+}

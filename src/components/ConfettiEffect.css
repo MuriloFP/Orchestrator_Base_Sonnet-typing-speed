@@ -1,0 +1,65 @@
+/* ConfettiEffect Component Styles */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: background-color var(--transition-fast);
+}
+
+.confetti-container.active {
+  /* Optional background flash for celebration */
+}
+
+/* Individual confetti particles */
+.confetti-particle {
+  position: fixed;
+  pointer-events: none;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Particle animations for different shapes */
+.confetti-particle.square {
+  border-radius: 0;
+}
+
+.confetti-particle.circle {
+  border-radius: 50%;
+}
+
+/* Performance optimizations */
+.confetti-particle {
+  /* Use GPU acceleration */
+  transform: translateZ(0);
+  /* Optimize for animations */
+  will-change: transform, opacity;
+  /* Prevent text selection */
+  user-select: none;
+  /* Smooth edges */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduced motion fallback */
+@media (prefers-reduced-motion: reduce) {
+  .confetti-container {
+    animation: none;
+  }
+  
+  .confetti-particle {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .confetti-particle {
+    border: 1px solid currentColor;
+  }
+}

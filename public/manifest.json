@@ -1,0 +1,72 @@
+{
+  "name": "Typing Speed Test",
+  "short_name": "TypingTest",
+  "description": "Test your typing speed and accuracy with multiple difficulty levels and real-time performance tracking",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Typing Speed Test - Desktop View"
+    },
+    {
+      "src": "/screenshot-narrow.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Typing Speed Test - Mobile View"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start Beginner Test",
+      "short_name": "Beginner",
+      "description": "Start a beginner level typing test",
+      "url": "/?difficulty=beginner",
+      "icons": [
+        {
+          "src": "/vite.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Start Advanced Test",
+      "short_name": "Advanced",
+      "description": "Start an advanced level typing test",
+      "url": "/?difficulty=advanced",
+      "icons": [
+        {
+          "src": "/vite.svg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}

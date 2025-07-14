@@ -1,0 +1,527 @@
+/* Timer Component Styles */
+.timer-component {
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.timer-component::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-success-400), var(--color-warning-400), var(--color-error-400));
+  background-size: 200% 100%;
+  animation: timerShimmer 4s ease-in-out infinite;
+}
+
+@keyframes timerShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Urgency Level Styling */
+.timer-component.normal {
+  border-color: var(--color-success-200);
+}
+
+.timer-component.normal::before {
+  background: linear-gradient(90deg, var(--color-success-400), var(--color-success-600));
+}
+
+.timer-component.caution {
+  border-color: var(--color-primary-200);
+}
+
+.timer-component.caution::before {
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-primary-600));
+}
+
+.timer-component.warning {
+  border-color: var(--color-warning-200);
+  animation: warningPulse 2s ease-in-out infinite;
+}
+
+.timer-component.warning::before {
+  background: linear-gradient(90deg, var(--color-warning-400), var(--color-warning-600));
+}
+
+.timer-component.critical {
+  border-color: var(--color-error-200);
+  animation: criticalPulse 1s ease-in-out infinite;
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.timer-component.critical::before {
+  background: linear-gradient(90deg, var(--color-error-400), var(--color-error-600));
+  animation: criticalShimmer 0.5s ease-in-out infinite;
+}
+
+@keyframes warningPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes criticalPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes criticalShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Main Timer Display */
+.timer-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.timer-icon {
+  font-size: var(--font-size-3xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-light);
+  transition: all var(--transition-fast);
+}
+
+.timer-component.critical .timer-icon {
+  animation: iconBounce 0.5s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.timer-display {
+  flex: 1;
+  text-align: center;
+}
+
+.time-value {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  transition: all var(--transition-fast);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.time-value.normal {
+  color: var(--color-success-600);
+}
+
+.time-value.caution {
+  color: var(--color-primary-600);
+}
+
+.time-value.warning {
+  color: var(--color-warning-600);
+  animation: warningGlow 2s ease-in-out infinite;
+}
+
+.time-value.critical {
+  color: var(--color-error-600);
+  animation: criticalGlow 1s ease-in-out infinite;
+}
+
+@keyframes warningGlow {
+  0%, 100% { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+  50% { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 10px rgba(251, 191, 36, 0.5); }
+}
+
+@keyframes criticalGlow {
+  0%, 100% { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+  50% { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 15px rgba(239, 68, 68, 0.7); }
+}
+
+.time-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timer-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.urgency-message {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-light);
+  white-space: nowrap;
+}
+
+.timer-component.critical .urgency-message {
+  color: var(--color-error-700);
+  background: var(--color-error-50);
+  border-color: var(--color-error-200);
+  animation: messageFlash 1s ease-in-out infinite;
+}
+
+@keyframes messageFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Progress Ring */
+.timer-progress {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+.progress-ring {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring-svg {
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.progress-ring-background {
+  stroke: var(--color-border-light);
+}
+
+.progress-ring-fill {
+  stroke: var(--color-primary-500);
+  stroke-linecap: round;
+  transition: stroke-dashoffset var(--transition-normal), stroke var(--transition-fast);
+}
+
+.progress-ring-fill.normal {
+  stroke: var(--color-success-500);
+}
+
+.progress-ring-fill.caution {
+  stroke: var(--color-primary-500);
+}
+
+.progress-ring-fill.warning {
+  stroke: var(--color-warning-500);
+}
+
+.progress-ring-fill.critical {
+  stroke: var(--color-error-500);
+  animation: ringPulse 1s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% { stroke-width: 4; }
+  50% { stroke-width: 6; }
+}
+
+.progress-percentage {
+  position: absolute;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+/* Time Breakdown */
+.time-breakdown {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.time-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+  flex: 1;
+}
+
+.detail-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-value {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* Critical Animation */
+.critical-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.pulse-ring {
+  position: absolute;
+  border: 2px solid var(--color-error-400);
+  border-radius: var(--radius-full);
+  width: 100px;
+  height: 100px;
+  animation: pulseRing 2s ease-out infinite;
+  opacity: 0;
+}
+
+.pulse-ring.delay-1 {
+  animation-delay: 0.5s;
+}
+
+.pulse-ring.delay-2 {
+  animation-delay: 1s;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Timer Motivation */
+.timer-motivation {
+  text-align: center;
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+}
+
+.motivation-text {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.timer-component.critical .motivation-text {
+  color: var(--color-error-700);
+  animation: motivationPulse 1s ease-in-out infinite;
+}
+
+@keyframes motivationPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Inactive State */
+.timer-component.inactive {
+  opacity: 0.8;
+}
+
+.timer-component.inactive .time-value {
+  color: var(--color-text-muted);
+}
+
+.timer-component.inactive .progress-ring-fill {
+  stroke: var(--color-border);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .timer-component {
+    padding: var(--space-4);
+  }
+  
+  .timer-main {
+    flex-direction: column;
+    gap: var(--space-3);
+    text-align: center;
+  }
+  
+  .timer-icon {
+    width: 3rem;
+    height: 3rem;
+    font-size: var(--font-size-2xl);
+  }
+  
+  .time-value {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .time-breakdown {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  .time-detail {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .progress-ring-svg {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .progress-percentage {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .timer-component {
+    padding: var(--space-3);
+  }
+  
+  .time-value {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .timer-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: var(--font-size-xl);
+  }
+  
+  .urgency-message {
+    font-size: var(--font-size-xs);
+    padding: var(--space-1) var(--space-2);
+  }
+  
+  .progress-ring-svg {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .progress-percentage {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Dark theme adjustments */
+.timer-component.dark .timer-motivation {
+  background: var(--color-background);
+}
+
+.timer-component.dark .time-detail {
+  background: var(--color-background);
+}
+
+.timer-component.dark .timer-icon {
+  background: var(--color-background);
+}
+
+.timer-component.dark .urgency-message {
+  background: var(--color-background);
+}
+
+.timer-component.dark.critical .urgency-message {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .time-value {
+    text-shadow: none;
+  }
+  
+  .timer-component.critical {
+    border: 3px solid var(--color-error-600);
+  }
+  
+  .progress-ring-fill {
+    stroke-width: 6;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .timer-component.warning,
+  .timer-component.critical {
+    animation: none;
+  }
+  
+  .time-value.warning,
+  .time-value.critical {
+    animation: none;
+  }
+  
+  .timer-icon,
+  .urgency-message,
+  .motivation-text {
+    animation: none;
+  }
+  
+  .progress-ring-fill {
+    transition: stroke-dashoffset var(--transition-normal);
+  }
+  
+  .pulse-ring {
+    animation: none;
+    display: none;
+  }
+}
+
+/* Focus indicators for accessibility */
+.timer-component:focus-within {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .timer-component {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .critical-animation,
+  .pulse-ring {
+    display: none;
+  }
+  
+  .time-value {
+    color: #000 !important;
+    text-shadow: none;
+  }
+}
